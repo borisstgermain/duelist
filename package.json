@@ -1,0 +1,16 @@
+{
+  "name": "duelist",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=prod webpack",
+    "start": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^2.26.0",
+    "webpack": "beta",
+    "webpack-dev-server": "beta"
+  }
+}
