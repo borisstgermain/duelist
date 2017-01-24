@@ -1,12 +1,8 @@
-'use strict';
-
 import {game} from './game.js';
+import Grid from './grid.js';
 
 game.init();
 
-const geometry = new THREE.BoxGeometry(1,1,1)
-const material = new THREE.MeshBasicMaterial({ wireframe: true, color: 0xffffff })
-const box = new THREE.Mesh(geometry, material)
-game.scene.add(box);
+const grid = new Grid(game.scene, 8, 8);
 
 game.start();

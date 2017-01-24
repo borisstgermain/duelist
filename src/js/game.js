@@ -41,7 +41,7 @@ class Game {
     }
 
     setCamera_() {
-        this.camera_.position.set(0, 1, -3);
+        this.camera_.position.set(20, 20, 300);
         this.camera_.lookAt(new THREE.Vector3());
     }
 
