@@ -1,12 +1,6 @@
 import Hex from './hex.js';
 
 const SIZE = 18;
-const COLOR = new THREE.Color(0x00ffff);
-const RADIUS_TOP = 10;
-const RADIUS_BOTTOM = 10;
-const HEIGHT = 1.5;
-const RADIUS_SEGMENTS = 6;
-
 
 export default class Grid {
     constructor(scene, column, row) {
@@ -27,12 +21,18 @@ export default class Grid {
     }
 
     createHex_(xpos, ypos) {
+        const color = new THREE.Color(0x00ffff);
+        const radiusTop = 10;
+        const radiusBottom = 10;
+        const height = 1.5;
+        const radiusSegments = 6;
+
         const hex = new Hex({
-            radiusTop: RADIUS_TOP,
-            radiusBottom: RADIUS_BOTTOM,
-            height: HEIGHT,
-            radiusSegments: RADIUS_SEGMENTS,
-            color: COLOR
+            radiusTop,
+            radiusBottom,
+            height,
+            radiusSegments,
+            color
         }).mesh;
 
         hex.position.x = SIZE * (xpos - this.column_ / 2);

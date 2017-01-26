@@ -11,6 +11,11 @@ class Game {
         this.renderer_ = null;
         this.controls_ = null;
         this.isInit_ = false;
+
+        this.mouse = new THREE.Vector2();
+        this.raycaster = new THREE.Raycaster();
+        this.currentHex = null;
+        this.prevHex = null;
     }
 
     get scene() {
@@ -30,6 +35,8 @@ class Game {
 
             this.setCamera_();
 
+            window.addEventListener('mousemove', this.onMouseMove_.bind(this), false);
+
             this.isInit_ = true;
         } else {
             throw new Error(`Game is initialization`);
@@ -46,8 +53,26 @@ class Game {
     }
 
     render_() {
+        this.raycaster.setFromCamera(this.mouse, this.camera_);
+        const hexs = this.raycaster.intersectObjects(this.scene_.children);
+        hexs.forEach((hex) => this.currentHex = hex.object);
+        if (this.currentHex != this.prevHex) {
+            if (this.currentHex) {
+                this.currentHex.material.color.set(0x00ff00);
+            }
+            if (this.prevHex) {
+                this.prevHex.material.color.set(0x00ffff);
+            }
+            this.prevHex = this.currentHex;
+        }
+
     	requestAnimationFrame(this.render_.bind(this));
     	this.renderer_.render(this.scene_, this.camera_);
+    }
+
+    onMouseMove_(event) {
+        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
     }
 };
 
